@@ -164,5 +164,5 @@ CPU1_FLASH 링크까지 처음으로 검증했습니다. 그 과정에서 발견
 
 ## 관련 링크
 - 상품 페이지: https://tms320f28x.co.kr/goods/goods_view.php?goodsNo=200903127
-- 게시판 글: https://tms320f28x.co.kr/board/view.php?bdId=tms320f28xevmv2- 게시판 글: (게시 후 URL 추가 예정)sno=111
+- 게시판 글: https://tms320f28x.co.kr/board/view.php?bdId=tms320f28xevmv2&sno=111
 - 유튜브 영상: (게시 후 URL 추가 예정)
