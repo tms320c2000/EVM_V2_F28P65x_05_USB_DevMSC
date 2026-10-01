@@ -1,0 +1,46 @@
+<projectSpec>
+  <project
+        name="5_USB_Dev_MSC_Freertos"
+        device="TMS320F28P650DK9"
+        cgtVersion="22.6.3.LTS"
+        products="C2000WARE"
+        outputFormat="ELF"
+        launchWizard="False"
+        linkerCommandFile=""
+        >
+    <!--
+      9_VariableVoltage2Ch_Freertos/5_USB_HostMouse_Freertos와 같은 FreeRTOS 커널/포트
+      (FreeRTOS/, device/) 구성을 그대로 재사용합니다. 힙 미사용(정적 할당만) 구성입니다.
+      USB Device Library(usblib) 헤더/라이브러리는 5_USB_Dev_MSC_Driverlib과 동일하게
+      포함하며, USB BOT/SCSI 엔진(usb_dev_msc.c 등)도 세 버전이 공유합니다.
+    -->
+    <configuration name="CPU1_RAM"
+        compilerBuildOptions="--opt_level=off -I${PROJECT_ROOT} -I${PROJECT_ROOT}/device -I${PROJECT_ROOT}/device/driverlib -I${PROJECT_ROOT}/usb -I${PROJECT_ROOT}/usb/include -I${PROJECT_ROOT}/FreeRTOS/include -I${PROJECT_ROOT}/FreeRTOS/port --define=ccs_c2k --c99 -v28 -ml -mt --cla_support=cla2 --define=RAM --float_support=fpu64 --tmu_support=tmu0 --define=DEBUG --define=CPU1 --gen_func_subsections=on --diag_warning=225 --diag_suppress=10063"
+        linkerBuildOptions="--entry_point code_start --stack_size=0x800 --heap_size=0x800 -i${PROJECT_ROOT} usblib.lib" />
+    <configuration name="CPU1_FLASH"
+        compilerBuildOptions="--opt_level=off -I${PROJECT_ROOT} -I${PROJECT_ROOT}/device -I${PROJECT_ROOT}/device/driverlib -I${PROJECT_ROOT}/usb -I${PROJECT_ROOT}/usb/include -I${PROJECT_ROOT}/FreeRTOS/include -I${PROJECT_ROOT}/FreeRTOS/port --define=ccs_c2k --c99 --define=_FLASH -v28 -ml -mt --cla_support=cla2 --float_support=fpu64 --tmu_support=tmu0 --define=DEBUG --define=CPU1 --gen_func_subsections=on --diag_warning=225 --diag_suppress=10063"
+        linkerBuildOptions="--entry_point code_start --stack_size=0x800 --heap_size=0x800 --define=_FLASH -i${PROJECT_ROOT} usblib.lib" />
+
+    <file action="copy" path="../driverlib.lib" targetDirectory="" applicableConfigurations="CPU1_RAM, CPU1_FLASH" />
+    <file action="copy" path="../usblib.lib" targetDirectory="" applicableConfigurations="CPU1_RAM, CPU1_FLASH" />
+    <file action="copy" path="../28p65x_freertos_ram_lnk_cpu1.cmd" targetDirectory="" applicableConfigurations="CPU1_RAM" />
+    <file action="copy" path="../28p65x_freertos_flash_lnk_cpu1.cmd" targetDirectory="" applicableConfigurations="CPU1_FLASH" />
+    <file action="copy" path="../targetConfigs/TMS320F28P650DK9.ccxml" targetDirectory="targetConfigs" />
+    <file action="copy" path="../device" targetDirectory="" />
+    <file action="copy" path="../usb" targetDirectory="" />
+    <file action="copy" path="../usb_hal.h" targetDirectory="" />
+    <file action="copy" path="../usb_hal.c" targetDirectory="" />
+    <file action="copy" path="../FreeRTOS" targetDirectory="" />
+    <file action="copy" path="../FreeRTOSConfig.h" targetDirectory="" />
+    <file action="copy" path="../c28x_uint8_compat.h" targetDirectory="" />
+    <file action="copy" path="../usb_dev_msc.h" targetDirectory="" />
+    <file action="copy" path="../usb_dev_msc.c" targetDirectory="" />
+    <file action="copy" path="../virtual_disk.h" targetDirectory="" />
+    <file action="copy" path="../virtual_disk.c" targetDirectory="" />
+    <file action="copy" path="../config_parser.h" targetDirectory="" />
+    <file action="copy" path="../config_parser.c" targetDirectory="" />
+    <file action="copy" path="../status_generator.h" targetDirectory="" />
+    <file action="copy" path="../status_generator.c" targetDirectory="" />
+    <file action="copy" path="../5_USB_Dev_MSC_Freertos.c" targetDirectory="" />
+  </project>
+</projectSpec>

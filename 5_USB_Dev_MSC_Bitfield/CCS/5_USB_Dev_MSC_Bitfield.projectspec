@@ -1,0 +1,43 @@
+<projectSpec>
+  <project
+        name="5_USB_Dev_MSC_Bitfield"
+        device="TMS320F28P650DK9"
+        cgtVersion="22.6.3.LTS"
+        products="C2000WARE"
+        outputFormat="ELF"
+        launchWizard="False"
+        linkerCommandFile=""
+        >
+    <!--
+      DriverLib을 전혀 쓰지 않는 자기완결형 프로젝트입니다.
+      USB 스택 자체는 TI USB Host Library(usblib.lib, 사전 빌드된 라이브러리)를 그대로
+      사용합니다 - usblib이 내부적으로 DriverLib 저수준 함수를 호출하도록 빌드되어
+      있어 driverlib.lib도 함께 링크합니다.
+    -->
+    <configuration name="CPU1_RAM"
+        compilerBuildOptions="--opt_level=off -I${PROJECT_ROOT} -I${PROJECT_ROOT}/device/common_include -I${PROJECT_ROOT}/device/headers_include -I${PROJECT_ROOT}/device/driverlib -I${PROJECT_ROOT}/usb -I${PROJECT_ROOT}/usb/include --define=ccs_c2k --c99 -v28 -ml -mt --cla_support=cla2 --float_support=fpu64 --tmu_support=tmu1 --define=DEBUG --define=CPU1 --gen_func_subsections --diag_warning=225 --diag_suppress=10063"
+        linkerBuildOptions="--stack_size=0x800 --heap_size=0x800 --entry_point code_start -i${PROJECT_ROOT} usblib.lib driverlib.lib" />
+    <configuration name="CPU1_FLASH"
+        compilerBuildOptions="--opt_level=off -I${PROJECT_ROOT} -I${PROJECT_ROOT}/device/common_include -I${PROJECT_ROOT}/device/headers_include -I${PROJECT_ROOT}/device/driverlib -I${PROJECT_ROOT}/usb -I${PROJECT_ROOT}/usb/include --define=ccs_c2k --c99 -v28 -ml -mt --cla_support=cla2 --float_support=fpu64 --tmu_support=tmu1 --define=DEBUG --define=CPU1 --gen_func_subsections --define=_FLASH --diag_warning=225 --diag_suppress=10063"
+        linkerBuildOptions="--stack_size=0x800 --heap_size=0x800 --entry_point code_start --define=_FLASH -i${PROJECT_ROOT} usblib.lib driverlib.lib" />
+
+    <file action="copy" path="../usblib.lib" targetDirectory="" applicableConfigurations="CPU1_RAM, CPU1_FLASH" />
+    <file action="copy" path="../driverlib.lib" targetDirectory="" applicableConfigurations="CPU1_RAM, CPU1_FLASH" />
+    <file action="copy" path="../device" targetDirectory="" />
+    <file action="copy" path="../usb" targetDirectory="" />
+    <file action="copy" path="../f28p65x_headers_nonBIOS_cpu1.cmd" targetDirectory="" />
+    <file action="copy" path="../28p65x_generic_ram_lnk_cpu1.cmd" targetDirectory="" applicableConfigurations="CPU1_RAM" />
+    <file action="copy" path="../28p65x_generic_flash_lnk_cpu1.cmd" targetDirectory="" applicableConfigurations="CPU1_FLASH" />
+    <file action="copy" path="../targetConfigs/TMS320F28P650DK9.ccxml" targetDirectory="targetConfigs" />
+    <file action="copy" path="../c28x_uint8_compat.h" targetDirectory="" />
+    <file action="copy" path="../usb_dev_msc.h" targetDirectory="" />
+    <file action="copy" path="../usb_dev_msc.c" targetDirectory="" />
+    <file action="copy" path="../virtual_disk.h" targetDirectory="" />
+    <file action="copy" path="../virtual_disk.c" targetDirectory="" />
+    <file action="copy" path="../config_parser.h" targetDirectory="" />
+    <file action="copy" path="../config_parser.c" targetDirectory="" />
+    <file action="copy" path="../status_generator.h" targetDirectory="" />
+    <file action="copy" path="../status_generator.c" targetDirectory="" />
+    <file action="copy" path="../5_USB_Dev_MSC_Bitfield.c" targetDirectory="" />
+  </project>
+</projectSpec>
